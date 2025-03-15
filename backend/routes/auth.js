@@ -8,7 +8,7 @@ const fetchuser= require('../middleware/fetchUser');
 
 const JWT_SECRET = 'your_jwt_secret_key';
 
-// Create a User using: POST '/api/auth/createuser'
+//Route 1- Create a User using: POST '/api/auth/createuser'. Login not required.
 router.post(
     '/createuser',
     [
@@ -50,7 +50,7 @@ router.post(
     }
 );
 
-// Authenticate a User using: POST '/api/auth/login'. Login not required.
+//Route 2- Authenticate a User using: POST '/api/auth/login'. Login not required.
 router.post(
     '/login',
     [
@@ -75,7 +75,6 @@ router.post(
 
             // Compare the password
             const passwordMatch = await bcrypt.compare(password, user.password);
-            console.log(password, user.password);
             if (!passwordMatch) {
                 return res.status(400).json({ error: 'Enter correct password' });
             }
@@ -92,9 +91,9 @@ router.post(
     }
 );
 
-// Details of User after logging in using: GET '/api/auth/getuser'.
+//Route 3- Details of User after logging in using: POST '/api/auth/getuser'. Login not required.
 
-router.get(
+router.post(
     '/getuser', fetchuser, async (req, res) => {
         try {
             userId= req.user.id;
