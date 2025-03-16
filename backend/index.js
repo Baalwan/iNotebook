@@ -13,7 +13,7 @@ app.use('/api/notes', require('./routes/notes'))
 connectToMongo()
   .then(() => {
     app.listen(port, () => {
-      console.log(`Server running at http://localhost:${port}`);
+      console.log(`iNoteBook backend: Server running at http://localhost:${port}`);
     });
   })
   .catch((err) => {
