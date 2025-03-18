@@ -1,0 +1,26 @@
+.notes-title {
+    text-align: center; /* Center align the title */
+    margin-bottom: 1.5rem; /* Space below title */
+    color: #343a40; /* Dark color for title */
+}
+
+.no-notes-message {
+    text-align: center; /* Center align the no notes message */
+    color: #6c757d; /* Muted color for the message */
+}
+
+.container {
+    max-width: 1200px; /* Limit container width for better layout */
+}
+
+.d-flex {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap in smaller screens */
+}
+
+@media (max-width: 768px) {
+    .d-flex {
+        flex-direction: column; /* Stack items on smaller screens */
+        align-items: center; /* Center items */
+    }
+}

@@ -81,7 +81,7 @@ router.post(
 
             // Generate JWT token
             const payload = { user: { id: user.id } };
-            const authToken = jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' }); // Expires in is optional
+            const authToken = jwt.sign(payload, JWT_SECRET); // Expires in is optional-, { expiresIn: '1h' })
 
             res.json({ authToken });
         } catch (error) {

@@ -1,0 +1,31 @@
+.add-note-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #f8f9fa; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+}
+
+.add-note-title {
+    text-align: center;
+    color: #343a40; 
+    margin-bottom: 1.5rem; 
+}
+
+.add-note-form .form-label {
+    font-weight: bold; 
+}
+
+.form-control {
+    border-radius: 5px; 
+}
+
+.btn-add-note {
+    width: 100%; 
+    padding: 10px; 
+}
+
+.btn-add-note:hover {
+    background-color: #0056b3; 
+}

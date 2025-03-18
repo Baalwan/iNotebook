@@ -1,11 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import './Navbar.css'; // Import a custom CSS file for styling
 
 function Navbar() {
     const location = useLocation();
 
     return (
-        <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
+        <nav className="navbar navbar-expand-lg bg-dark navbar-dark shadow-sm">
             <div className="container-fluid">
                 <Link className="navbar-brand" to="/">iNoteBook</Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,8 +21,8 @@ function Navbar() {
                             <Link className={`nav-link ${location.pathname === "/about" ? "active" : ""}`} to="/about">About</Link>
                         </li>
                         <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown
+                            <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                More
                             </a>
                             <ul className="dropdown-menu">
                                 <li><Link className="dropdown-item" to="#">Action</Link></li>
@@ -30,14 +31,11 @@ function Navbar() {
                                 <li><Link className="dropdown-item" to="#">Something else here</Link></li>
                             </ul>
                         </li>
-                        <li className="nav-item">
-                            <span className="nav-link disabled" aria-disabled="true">Disabled</span>
-                        </li>
                     </ul>
-                    <form className="d-flex" role="search">
-                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                        <button className="btn btn-outline-success" type="submit">Search</button>
-                    </form>
+                    <div className="d-flex">
+                        <Link className="btn btn-outline-light mx-1" to="/Login">Login</Link>
+                        <Link className="btn btn-outline-light mx-1" to="/Signup">Signup</Link>
+                    </div>
                 </div>
             </div>
         </nav>

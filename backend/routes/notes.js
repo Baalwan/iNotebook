@@ -53,7 +53,7 @@ router.post(
 
 // Route 3: Update an existing note using: PUT '/api/notes/updatenotes/:id'
 router.put(
-    '/updatenotes/:id',
+    '/updateNotes/:id',
     fetchuser,
     [
         body('title', 'Title must be at least 3 characters').optional().isLength({ min: 3 }),

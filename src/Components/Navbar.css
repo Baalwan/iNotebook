@@ -1,0 +1,38 @@
+.navbar {
+    transition: background-color 0.3s ease;
+}
+
+.navbar:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.nav-link {
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-link.active {
+    color: #f8f9fa;
+    font-weight: bold;
+}
+
+.nav-link:hover {
+    color: #ffcc00; /* Change color on hover */
+}
+
+.dropdown-menu {
+    background-color: #343a40; /* Darker background for dropdown */
+}
+
+.dropdown-item:hover {
+    background-color: #495057; /* Darker hover effect for dropdown items */
+}
+
+.btn-outline-light {
+    border-color: #f8f9fa; /* Light border for buttons */
+}
+
+.btn-outline-light:hover {
+    background-color: #f8f9fa; /* Light background on hover */
+    color: #343a40; /* Dark text on hover */
+}
