@@ -7,9 +7,18 @@ const NoteState = (props) => {
     
     const [notes, setNotes] = useState(notesInitial);
     const [currentNote, setCurrentNote] = useState({ id: "", title: "", description: "", tag: "" }); 
-    const [showModal, setShowModal] = useState(false); 
+    const [showModal, setShowModal] = useState(false);
+    const [alert, setAlert] = useState({ message: "", type: "" }); // Add alert state
 
-    // ✅ Fetch all Notes (API Call)
+    // Function to set alert with a timeout to clear it
+    const showAlert = (message, type) => {
+        setAlert({ message, type });
+        setTimeout(() => {
+            setAlert({ message: "", type: "" });
+        }, 3000); // Clear alert after 3 seconds
+    };
+
+    // Fetch all Notes (API Call)
     const getNotes = async () => {
         try {
             const response = await fetch(`${host}/api/notes/fetchallnotes`, {
@@ -30,7 +39,7 @@ const NoteState = (props) => {
         }
     };
 
-    // ✅ Add a Note (API Call)
+    // Add a Note (API Call)
     const addNote = async (title, description, tag) => {
         try {
             const response = await fetch(`${host}/api/notes/addnotes`, {
@@ -43,13 +52,19 @@ const NoteState = (props) => {
             });
 
             const json = await response.json();
-            setNotes([...notes, json]);
+            if (response.ok) {
+                setNotes([...notes, json]);
+                showAlert("Note added successfully!", "success");
+            } else {
+                showAlert("Failed to add note.", "danger");
+            }
         } catch (error) {
             console.error("Error adding note:", error);
+            showAlert("Error adding note.", "danger");
         }
     };
 
-    // ✅ Edit a Note (API Call)
+    // Edit a Note (API Call)
     const editNote = async (id, title, description, tag) => {
         try {
             const response = await fetch(`${host}/api/notes/updateNotes/${id}`, {
@@ -68,16 +83,19 @@ const NoteState = (props) => {
                         note._id === id ? { ...note, title, description, tag } : note
                     )
                 );
-                setShowModal(false); // Close the modal
+                setShowModal(false);
+                showAlert("Note updated successfully!", "success");
             } else {
                 console.error("Failed to update note:", await response.json());
+                showAlert("Failed to update note.", "danger");
             }
         } catch (error) {
             console.error("Error updating note:", error);
+            showAlert("Error updating note.", "danger");
         }
     };
 
-    // ✅ Delete a Note (API Call)
+    // Delete a Note (API Call)
     const deleteNote = async (id) => {
         try {
             const response = await fetch(`${host}/api/notes/deleteNote/${id}`, {
@@ -89,15 +107,19 @@ const NoteState = (props) => {
 
             if (response.ok) {
                 setNotes(notes.filter((note) => note._id !== id));
+                showAlert("Note deleted successfully!", "success"); // Optional: Add alert for delete
             } else {
                 console.error("Failed to delete note.");
+                showAlert("Failed to delete note.", "danger");
             }
         } catch (error) {
             console.error("Error deleting note:", error);
+            showAlert("Error deleting note.", "danger");
         }
     };
+
     return (
-        <NoteContext.Provider value={{ notes, setNotes, addNote, editNote, deleteNote, getNotes, setCurrentNote, showModal, setShowModal }}>
+        <NoteContext.Provider value={{ notes, setNotes, addNote, editNote, deleteNote, getNotes, setCurrentNote, showModal, setShowModal, alert, showAlert }}>
             {props.children}
         </NoteContext.Provider>
     );

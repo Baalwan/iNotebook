@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import NoteContext from "../Context/Notes/NoteContext";
 
 const Login = () => {
+    const { showAlert } = useContext(NoteContext);
     const [credentials, setCredentials] = useState({ email: "", password: "" });
     let navigate = useNavigate();
     const host = "http://localhost:5000";
@@ -14,7 +16,7 @@ const Login = () => {
         e.preventDefault();
 
         if (!credentials.email || !credentials.password) {
-            alert("Please fill in all fields.");
+            showAlert("Please fill in all fields.", "danger");
             return;
         }
 
@@ -32,13 +34,14 @@ const Login = () => {
 
             if (json.authToken) {
                 localStorage.setItem("token", json.authToken);
+                showAlert("Logged in successfully!", "success");
                 navigate("/");
             } else {
-                alert("Invalid credentials, please try again.");
+                showAlert("Invalid credentials, please try again.", "danger");
             }
         } catch (error) {
             console.error("Error during login:", error);
-            alert("Login failed. Please check your connection and try again.");
+            showAlert("Login failed. Please check your connection and try again.", "danger");
         }
     };
 
@@ -75,9 +78,7 @@ const Login = () => {
                                 />
                             </div>
                             <div className="d-grid">
-                                <button type="submit" className="btn btn-primary btn-lg my-4">
-                                    Login
-                                </button>
+                                <button type="submit" className="btn btn-primary btn-lg my-4">Login</button>
                             </div>
                         </form>
                     </div>
