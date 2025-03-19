@@ -4,14 +4,20 @@ import AddNote from "./AddNote";
 import NoteContext from '../Context/Notes/NoteContext';
 import EditModal from './editModal';
 import './Notes.css'; // Import a custom CSS file for styling
+import { useNavigate } from 'react-router-dom';
 
 const Notes = () => {
     const context = useContext(NoteContext);
     const { notes, getNotes } = context;
+    const navigate = useNavigate();
 
     useEffect(() => {
-        getNotes();
-    }, [getNotes]);
+        if (localStorage.getItem('token')) {
+            getNotes();
+        } else {
+            navigate('/login'); // Redirect to login if no token
+        }
+    }, [getNotes, navigate]); // Dependencies fixed
 
     const [showModal, setShowModal] = useState(false);
     const [currentNote, setCurrentNote] = useState({ id: "", title: "", description: "", tag: "" });

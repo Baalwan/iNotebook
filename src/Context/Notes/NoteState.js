@@ -25,7 +25,7 @@ const NoteState = (props) => {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
-                    "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjdkM2VkZWYyYzBhNDdlYTI1MzFmOGY1In0sImlhdCI6MTc0MjI5Mzk2OX0.TZN0XGRZIfxjCKLUSLbVnltXatorf1Lh-CzM7MZSq6E"
+                    "auth-token": localStorage.getItem('token')
                 },
             });
             const json = await response.json();
@@ -46,7 +46,7 @@ const NoteState = (props) => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjdkM2VkZWYyYzBhNDdlYTI1MzFmOGY1In0sImlhdCI6MTc0MjI5Mzk2OX0.TZN0XGRZIfxjCKLUSLbVnltXatorf1Lh-CzM7MZSq6E"
+                    "auth-token": localStorage.getItem('token')
                 },
                 body: JSON.stringify({ title, description, tag }),
             });
@@ -71,7 +71,7 @@ const NoteState = (props) => {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
-                    "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjdkM2VkZWYyYzBhNDdlYTI1MzFmOGY1In0sImlhdCI6MTc0MjI5Mzk2OX0.TZN0XGRZIfxjCKLUSLbVnltXatorf1Lh-CzM7MZSq6E"
+                    "auth-token": localStorage.getItem('token')
                 },
                 body: JSON.stringify({ title, description, tag }),
             });
@@ -101,13 +101,13 @@ const NoteState = (props) => {
             const response = await fetch(`${host}/api/notes/deleteNote/${id}`, {
                 method: "DELETE",
                 headers: {
-                    "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjdkM2VkZWYyYzBhNDdlYTI1MzFmOGY1In0sImlhdCI6MTc0MjI5Mzk2OX0.TZN0XGRZIfxjCKLUSLbVnltXatorf1Lh-CzM7MZSq6E"
+                    "auth-token": localStorage.getItem('token')
                 },
             });
 
             if (response.ok) {
                 setNotes(notes.filter((note) => note._id !== id));
-                showAlert("Note deleted successfully!", "success"); // Optional: Add alert for delete
+                showAlert("Note deleted successfully!", "success");
             } else {
                 console.error("Failed to delete note.");
                 showAlert("Failed to delete note.", "danger");

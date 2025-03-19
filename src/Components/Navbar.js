@@ -1,9 +1,15 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import './Navbar.css'; // Import a custom CSS file for styling
 
 function Navbar() {
     const location = useLocation();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem('token'); // Clear the token
+        navigate('/'); // Redirect to home page
+    };
 
     return (
         <nav className="navbar navbar-expand-lg bg-dark navbar-dark shadow-sm">
@@ -33,8 +39,14 @@ function Navbar() {
                         </li>
                     </ul>
                     <div className="d-flex">
-                        <Link className="btn btn-outline-light mx-1" to="/Login">Login</Link>
-                        <Link className="btn btn-outline-light mx-1" to="/Signup">Signup</Link>
+                        {localStorage.getItem('token') ? (
+                            <button className="btn btn-outline-light mx-1" onClick={handleLogout}>Logout</button>
+                        ) : (
+                            <>
+                                <Link className="btn btn-outline-light mx-1" to="/login">Login</Link>
+                                <Link className="btn btn-outline-light mx-1" to="/signup">Signup</Link>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>
