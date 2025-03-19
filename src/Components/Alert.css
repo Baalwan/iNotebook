@@ -1,0 +1,33 @@
+.alert {
+    margin: 20px 0; /* Add margin for spacing above and below */
+    border-radius: 5px; /* Rounded corners for alert */
+    transition: opacity 0.3s ease; /* Smooth transition for fading */
+}
+
+.alert-primary {
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white; /* White text for contrast */
+}
+
+.alert-success {
+    background-color: #28a745; /* Bootstrap success color */
+    color: white; /* White text for contrast */
+}
+
+.alert-danger {
+    background-color: #dc3545; /* Bootstrap danger color */
+    color: white; /* White text for contrast */
+}
+
+.alert-warning {
+    background-color: #ffc107; /* Bootstrap warning color */
+    color: #212529; /* Dark text for better contrast */
+}
+
+.btn-close {
+    opacity: 0.5; /* Slightly transparent close button */
+}
+
+.btn-close:hover {
+    opacity: 1; /* Fully opaque on hover */
+}

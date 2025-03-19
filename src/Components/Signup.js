@@ -70,7 +70,7 @@ const Signup = () => {
             <div className="row justify-content-center">
                 <div className="col-md-6">
                     <div className="card shadow-lg p-4 rounded">
-                        <h2 className="text-center mb-4">Signup</h2>
+                        <h2 className="text-center mb-4">Create Account</h2>
                         {error && <div className="alert alert-danger">{error}</div>}
                         <form onSubmit={handleSubmit}>
                             <div className="mb-3">
